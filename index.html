@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Generate a weekly college timetable from your subjects and class requirements.">
+  <title>AI Timetable Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">TG</div>
+    <div>
+      <p class="eyebrow">SMART CAMPUS TOOL</p>
+      <h1>AI Timetable Generator</h1>
+    </div>
+    <span class="status-pill"><span class="status-dot"></span> Ready to plan</span>
+  </header>
+
+  <main class="layout">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">PLAN YOUR WEEK</p>
+        <h2>A clearer week starts with a smarter timetable.</h2>
+        <p class="intro-copy">Enter your subjects and weekly class requirements. Generate, review, and print a balanced timetable for your college week.</p>
+      </div>
+      <div class="intro-icon" aria-hidden="true">▦</div>
+    </section>
+
+    <section class="panel setup-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">STEP 01</p>
+          <h2>Timetable settings</h2>
+        </div>
+        <span class="step-number">01</span>
+      </div>
+
+      <form id="timetable-form">
+        <div class="field-grid">
+          <label class="field">
+            <span>College / class name</span>
+            <input id="class-name" type="text" value="B.Tech CSE - Year 2" maxlength="80" required>
+          </label>
+          <label class="field">
+            <span>Periods per day</span>
+            <select id="period-count">
+              <option value="5">5 periods</option>
+              <option value="6" selected>6 periods</option>
+              <option value="7">7 periods</option>
+              <option value="8">8 periods</option>
+            </select>
+          </label>
+        </div>
+
+        <fieldset class="days-field">
+          <legend>College working days</legend>
+          <div class="day-options">
+            <label><input type="checkbox" name="day" value="Monday" checked><span>Mon</span></label>
+            <label><input type="checkbox" name="day" value="Tuesday" checked><span>Tue</span></label>
+            <label><input type="checkbox" name="day" value="Wednesday" checked><span>Wed</span></label>
+            <label><input type="checkbox" name="day" value="Thursday" checked><span>Thu</span></label>
+            <label><input type="checkbox" name="day" value="Friday" checked><span>Fri</span></label>
+            <label><input type="checkbox" name="day" value="Saturday"><span>Sat</span></label>
+          </div>
+        </fieldset>
+
+        <div class="section-heading subjects-heading">
+          <div>
+            <p class="eyebrow">STEP 02</p>
+            <h2>Your subjects</h2>
+            <p class="muted">Set how many periods each subject needs per week.</p>
+          </div>
+          <button type="button" class="button button-light button-small" id="add-subject">+ Add subject</button>
+        </div>
+
+        <div class="subject-table-wrap">
+          <table class="subject-table">
+            <thead>
+              <tr><th>Subject name</th><th>Periods / week</th><th>Teacher (optional)</th><th></th></tr>
+            </thead>
+            <tbody id="subjects-body"></tbody>
+          </table>
+        </div>
+        <p class="hint">Tip: enter each subject once. The generator spreads its required periods across your selected days where possible.</p>
+
+        <div class="actions">
+          <button class="button button-primary" type="submit"><span>✦</span> Generate timetable</button>
+          <button class="button button-light" type="button" id="load-example">Load example</button>
+        </div>
+        <p id="form-message" class="message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="panel results-panel">
+      <div class="section-heading results-heading">
+        <div>
+          <p class="eyebrow">STEP 03</p>
+          <h2>Your weekly timetable</h2>
+          <p id="timetable-subtitle" class="muted">Your generated schedule will appear here.</p>
+        </div>
+        <div class="result-actions">
+          <button type="button" class="button button-light button-small" id="download-csv" disabled>↓ CSV</button>
+          <button type="button" class="button button-light button-small" id="print-timetable" disabled>Print</button>
+        </div>
+      </div>
+
+      <div id="empty-state" class="empty-state">
+        <div class="empty-icon">▦</div>
+        <h3>Your timetable is waiting</h3>
+        <p>Add your subjects above and choose <strong>Generate timetable</strong> to create your weekly plan.</p>
+      </div>
+
+      <div id="timetable-wrap" class="timetable-wrap" hidden>
+        <div id="timetable-grid"></div>
+      </div>
+      <div id="summary" class="summary-grid" hidden></div>
+      <p class="footer-note">Generated schedules are suggestions. Review class requirements and room availability with your college before using the timetable officially.</p>
+    </section>
+  </main>
+
+  <footer><span>AI Timetable Generator</span><span>Student project · Built with HTML, CSS, JavaScript & Flask</span></footer>
+  <script src="script.js"></script>
+</body>
+</html>
